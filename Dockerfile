@@ -1,4 +1,4 @@
-FROM php:7.4.18-fpm-alpine
+FROM php:7.4.18-fpm
 
 
 RUN apt-get update \
