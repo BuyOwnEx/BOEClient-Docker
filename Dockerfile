@@ -3,7 +3,7 @@ FROM php:7.4.18-fpm
 
 RUN apt-get update \
 && apt-get install -y libpq-dev \
-&& docker-php-ext-install ctype fileinfo json mbstring tokenizer xml pdo pdo_pgsql pdo_mysql bcmath 
+&& docker-php-ext-install ctype fileinfo json tokenizer xml pdo pdo_pgsql pdo_mysql bcmath 
 
 # Install composer
 ENV COMPOSER_HOME /composer
