@@ -11,7 +11,7 @@ RUN apt-get update
 RUN echo "exit 0" > /usr/sbin/policy-rc.d
 
 #Установить nginx, php-fpm
-RUN apt-get install -y nginx php php-fpm pdo_mysql pdo_pgsql php-mbstring php-dom net-tools wget htop less nano git
+RUN apt-get install -y nginx php php-fpm php7.2-mysql php7.2-pgsql php-mbstring php-dom net-tools wget htop less nano git
 
 #Определение переменных среды
 ENV nginx_vhost /etc/nginx/sites-available/default
