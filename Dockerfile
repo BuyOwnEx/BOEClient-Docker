@@ -8,7 +8,7 @@ RUN apt-get update
 RUN echo "exit 0" > /usr/sbin/policy-rc.d
 
 #Установить nginx, php-fpm
-RUN apt-get install -y nginx php-fpm net-tools wget htop less nano && \
+RUN apt-get install -y nginx php-fpm net-tools wget htop less nano git && \
 rm -rf /var/lib/apt/lists/*
 
 #Определение переменных среды
