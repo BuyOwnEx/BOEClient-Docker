@@ -1,6 +1,9 @@
 #Загрузить базовый образ Ubuntu 18.04
 FROM ubuntu:18.04
 
+#Интерактивный режим
+ENV DEBIAN_FRONTEND noninteractive
+
 #Обновить программный репозиторий Ubuntu
 RUN apt-get update
 
