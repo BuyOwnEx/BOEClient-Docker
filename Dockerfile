@@ -11,31 +11,7 @@ RUN apt-get update
 RUN echo "exit 0" > /usr/sbin/policy-rc.d
 
 #Установить nginx, php-fpm
-RUN apt-get install -y nginx php-fpm net-tools wget htop less nano git
-
-# Configure php extensions
-RUN docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
-    && docker-php-ext-configure zip --with-libzip
-
-# Install php extensions
-RUN docker-php-ext-install \
-    bcmath \
-    calendar \
-    curl \
-    exif \
-    gd \
-    iconv \
-    intl \
-    mbstring \
-    pdo \
-    pdo_mysql \
-    pdo_pgsql \
-    pdo_sqlite \
-    pcntl \
-    soap \
-    tokenizer \
-    xml \
-    zip
+RUN apt-get install -y nginx php php-fpm pdo-mysql pdo-pgsql php-mbstring php-dom net-tools wget htop less nano git
 
 #Определение переменных среды
 ENV nginx_vhost /etc/nginx/sites-available/default
