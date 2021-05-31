@@ -5,7 +5,7 @@ FROM ubuntu:18.04
 RUN apt-get update
 
 #Установить nginx, php-fpm
-RUN apt-get install -y nginx php7.2-fpm && \
+RUN apt-get install -y nginx php7.2-fpm net-tools wget htop less nano && \
 rm -rf /var/lib/apt/lists/*
 
 #Определение переменных среды
@@ -21,6 +21,8 @@ echo "\ndaemon off;" >> ${nginx_conf}
 RUN mkdir -p /run/php && \
 chown -R www-data:www-data /var/www/html && \
 chown -R www-data:www-data /run/php
+
+CMD /usr/sbin/php-fpm7.2 -D; nginx
 
 #Порты для nginx
 EXPOSE 80 443
