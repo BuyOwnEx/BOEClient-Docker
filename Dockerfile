@@ -8,9 +8,6 @@ RUN apt-get update
 RUN apt-get install -y nginx php7.2-fpm && \
 rm -rf /var/lib/apt/lists/*
 
-RUN apt-get install -y libpq-dev libxml2-dev libmcrypt-dev libmemcached-dev \
-&& docker-php-ext-install ctype fileinfo json tokenizer xml pdo pdo_pgsql pdo_mysql bcmath opcache
-
 #Определение переменных среды
 ENV nginx_vhost /etc/nginx/sites-available/default
 ENV php_conf /etc/php/7.2/fpm/php.ini
