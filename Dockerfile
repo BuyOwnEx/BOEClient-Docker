@@ -34,10 +34,8 @@ CMD /usr/sbin/php-fpm7.2 -D; nginx
 EXPOSE 80 443
 
 # Install composer
-ENV COMPOSER_HOME /composer
-ENV PATH ./vendor/bin:/composer/vendor/bin:$PATH
 ENV COMPOSER_ALLOW_SUPERUSER 1
-RUN curl -s https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin/ --filename=composer
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin/ --filename=composer
 
 # Setup working directory
 WORKDIR /var/www/html
@@ -46,6 +44,8 @@ WORKDIR /var/www/html
 RUN rm -r ./* && \
 git clone https://github.com/BuyOwnEx/BOEClient.git ./ && \
 chown -R www-data:www-data /var/www/html
+
+RUN composer install
 
 #disallow starting recently installed packages
 RUN echo "exit 101" > /usr/sbin/policy-rc.d
