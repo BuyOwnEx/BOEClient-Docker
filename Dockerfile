@@ -11,7 +11,7 @@ RUN apt-get update
 RUN echo "exit 0" > /usr/sbin/policy-rc.d
 
 #Установить nginx, php-fpm
-RUN apt-get install -y nginx php-fpm net-tools wget htop less nano git && \
+RUN apt-get install -y nginx php-fpm net-tools wget htop less nano git
 
 # Configure php extensions
 RUN docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
@@ -70,7 +70,7 @@ chown -R www-data:www-data /var/www/html
 ENV COMPOSER_ALLOW_SUPERUSER 1
 RUN composer install
 
-rm -rf /var/lib/apt/lists/*
+RUN rm -rf /var/lib/apt/lists/*
 
 #disallow starting recently installed packages
 RUN echo "exit 101" > /usr/sbin/policy-rc.d
