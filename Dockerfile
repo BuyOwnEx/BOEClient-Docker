@@ -4,8 +4,11 @@ FROM ubuntu:18.04
 #Обновить программный репозиторий Ubuntu
 RUN apt-get update
 
+#allow starting recently installed packages
+RUN echo "exit 0" > /usr/sbin/policy-rc.d
+
 #Установить nginx, php-fpm
-RUN apt-get install -y nginx php7.2-fpm net-tools wget htop less nano && \
+RUN apt-get install -y nginx php-fpm net-tools wget htop less nano && \
 rm -rf /var/lib/apt/lists/*
 
 #Определение переменных среды
@@ -35,3 +38,6 @@ RUN curl -s https://getcomposer.org/installer | php -- --install-dir=/usr/local/
 
 # Setup working directory
 WORKDIR /var/www/html
+
+#disallow starting recently installed packages
+RUN echo "exit 101" > /usr/sbin/policy-rc.d
