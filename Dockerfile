@@ -34,8 +34,9 @@ CMD /usr/sbin/php-fpm7.2 -D; nginx
 EXPOSE 80 443
 
 # Install composer
-ENV COMPOSER_ALLOW_SUPERUSER 1
-RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+#ENV COMPOSER_ALLOW_SUPERUSER 1
+#RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+COPY --from=composer:latest /usr/bin/composer /usr/local/bin/composer
 
 # Setup working directory
 WORKDIR /var/www/html
