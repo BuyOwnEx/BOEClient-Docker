@@ -14,6 +14,30 @@ RUN echo "exit 0" > /usr/sbin/policy-rc.d
 RUN apt-get install -y nginx php-fpm net-tools wget htop less nano git && \
 rm -rf /var/lib/apt/lists/*
 
+# Configure php extensions
+RUN docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
+    && docker-php-ext-configure zip --with-libzip
+
+# Install php extensions
+RUN docker-php-ext-install \
+    bcmath \
+    calendar \
+    curl \
+    exif \
+    gd \
+    iconv \
+    intl \
+    mbstring \
+    pdo \
+    pdo_mysql \
+    pdo_pgsql \
+    pdo_sqlite \
+    pcntl \
+    soap \
+    tokenizer \
+    xml \
+    zip
+
 #Определение переменных среды
 ENV nginx_vhost /etc/nginx/sites-available/default
 ENV php_conf /etc/php/7.2/fpm/php.ini
@@ -34,8 +58,6 @@ CMD /usr/sbin/php-fpm7.2 -D; nginx
 EXPOSE 80 443
 
 # Install composer
-#ENV COMPOSER_ALLOW_SUPERUSER 1
-#RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 COPY --from=composer:latest /usr/bin/composer /usr/local/bin/composer
 
 # Setup working directory
@@ -46,6 +68,7 @@ RUN rm -r ./* && \
 git clone https://github.com/BuyOwnEx/BOEClient.git ./ && \
 chown -R www-data:www-data /var/www/html
 
+ENV COMPOSER_ALLOW_SUPERUSER 1
 RUN composer install
 
 #disallow starting recently installed packages
