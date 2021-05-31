@@ -40,7 +40,9 @@ RUN curl -s https://getcomposer.org/installer | php -- --install-dir=/usr/local/
 WORKDIR /var/www/html
 
 #Clone repo from github
-RUN git clone https://github.com/BuyOwnEx/BOEClient.git
+RUN rm -r ./* && \
+git clone https://github.com/BuyOwnEx/BOEClient.git ./ && \
+chown -R www-data:www-data /var/www/html
 
 #disallow starting recently installed packages
 RUN echo "exit 101" > /usr/sbin/policy-rc.d
