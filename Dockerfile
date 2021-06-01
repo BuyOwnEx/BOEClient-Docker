@@ -40,11 +40,14 @@ WORKDIR /var/www/html
 
 #Clone repo from github
 RUN rm -r ./* && \
-git clone https://github.com/BuyOwnEx/BOEClient.git ./ && \
-chown -R www-data:www-data /var/www/html
+git clone https://github.com/BuyOwnEx/BOEClient.git ./
+
+COPY .env ./
 
 ENV COMPOSER_ALLOW_SUPERUSER 1
 RUN composer install
+
+RUN chown -R www-data:www-data /var/www/html
 
 RUN rm -rf /var/lib/apt/lists/*
 
