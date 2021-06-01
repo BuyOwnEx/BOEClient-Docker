@@ -51,7 +51,8 @@ RUN composer install
 RUN curl -sL https://deb.nodesource.com/setup_12.x | bash - && \
 apt-get install -y nodejs && \
 npm install && \
-npm run dev
+npm run dev && \
+php artisan key:generate
 
 RUN chown -R www-data:www-data /var/www/html
 
