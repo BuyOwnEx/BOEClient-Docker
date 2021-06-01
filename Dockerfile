@@ -11,7 +11,7 @@ RUN apt-get update
 RUN echo "exit 0" > /usr/sbin/policy-rc.d
 
 #Установить nginx, php-fpm
-RUN apt-get install -y nginx php php-fpm php7.2-mysql php7.2-pgsql php-mbstring php-dom php-zip net-tools wget htop less nano git unzip
+RUN apt-get install -y nginx php php-fpm php7.2-mysql php7.2-pgsql php-mbstring php-dom php-zip net-tools wget htop less nano git unzip curl
 
 #Определение переменных среды
 ENV nginx_vhost /etc/nginx/sites-available/default
@@ -46,6 +46,12 @@ COPY .env ./
 
 ENV COMPOSER_ALLOW_SUPERUSER 1
 RUN composer install
+
+# get install nodejs and npm
+RUN curl -sL https://deb.nodesource.com/setup_12.x | -E bash -
+RUN apt-get install -y nodejs
+RUN npm install
+RUN npm run dev
 
 RUN chown -R www-data:www-data /var/www/html
 
