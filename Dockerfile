@@ -48,10 +48,10 @@ ENV COMPOSER_ALLOW_SUPERUSER 1
 RUN composer install
 
 # get install nodejs and npm
-RUN curl -sL https://deb.nodesource.com/setup_12.x | -E bash -
-RUN apt-get install -y nodejs
-RUN npm install
-RUN npm run dev
+RUN curl -sL https://deb.nodesource.com/setup_12.x | bash - && \
+apt-get install -y nodejs && \
+npm install && \
+npm run dev
 
 RUN chown -R www-data:www-data /var/www/html
 
